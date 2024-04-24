@@ -1,13 +1,12 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Extra, root_model
 from typing import Optional
 
 
 class Contact(BaseModel):
-    name: str
     email: EmailStr
-    phone: Optional[str] = None
-    custom_fields: Optional[dict] = Field(default_factory=dict)
-    # TODO add custom from sheets if is needed
+
+    class Config:
+        extra = Extra.allow  # Allows the model to accept arbitrary additional fields
 
 
 class MessageTemplate(BaseModel):
