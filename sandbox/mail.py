@@ -1,5 +1,6 @@
 from google.cloud import gmail
 
+
 def send_mass_mail(sender_email: str, recipient_emails: list, subject: str, body: str):
     """Sends a mass mail to a list of recipients.
 
@@ -24,5 +25,8 @@ def send_mass_mail(sender_email: str, recipient_emails: list, subject: str, body
 
         client.send_message(user_id="me", message=message.id)
 
-if __name__ == '__main__':
-    send_mass_mail("anadoriflame@gmail.com", ["luisehica@gmail.com"], "email_prueba", "it works")
+
+if __name__ == "__main__":
+    send_mass_mail(
+        "anadoriflame@gmail.com", ["luisehica@gmail.com"], "email_prueba", "it works"
+    )
