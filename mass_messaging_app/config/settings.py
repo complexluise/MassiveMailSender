@@ -16,8 +16,8 @@ class GoogleServiceSettings(BaseSettings):
     """Google API service configuration settings.
     OAuth Authorization
     """
-    google_credentials_path: str = Field(..., env="GOOGLE_CREDENTIALS_PATH")
 
+    google_credentials_path: str = Field(..., env="GOOGLE_CREDENTIALS_PATH")
 
 
 class AppConfig(BaseSettings):

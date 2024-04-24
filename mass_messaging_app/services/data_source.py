@@ -2,7 +2,10 @@ from csv import DictReader
 
 from mass_messaging_app.models.models import Contact
 from mass_messaging_app.config.settings import GoogleServiceSettings
-from mass_messaging_app.services.google_service import _fetch_contacts_from_sheet, _get_credentials_from_oauth
+from mass_messaging_app.services.google_service import (
+    _fetch_contacts_from_sheet,
+    _get_credentials_from_oauth,
+)
 
 
 def get_google_credentials():
@@ -32,7 +35,7 @@ def fetch_contacts_from_csv(file_path: str) -> list[Contact]:
     """
     contacts = []
     try:
-        with open(file_path, mode='r', newline='', encoding='utf-8') as file:
+        with open(file_path, mode="r", newline="", encoding="utf-8") as file:
             reader: DictReader = DictReader(file)
             for row in reader:
                 # Assuming the CSV column names match the Contact model field names
@@ -43,4 +46,3 @@ def fetch_contacts_from_csv(file_path: str) -> list[Contact]:
     except Exception as e:
         print(f"An error occurred: {e}")
     return contacts
-

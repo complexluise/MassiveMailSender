@@ -20,7 +20,9 @@ class EmailSender:
         msg.attach(MIMEText(html_message, "html"))
 
         try:
-            with smtplib.SMTP_SSL(self.config.smtp_server, self.config.smtp_port) as server:
+            with smtplib.SMTP_SSL(
+                self.config.smtp_server, self.config.smtp_port
+            ) as server:
                 if self.config.smtp_use_ssl:
                     server.starttls()
                 server.login(self.config.smtp_user, self.config.smtp_password)
