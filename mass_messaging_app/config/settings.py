@@ -21,7 +21,7 @@ class GoogleServiceSettings(BaseSettings):
     credentials_path: str = Field(..., env="GOOGLE_CREDENTIALS_PATH")
 
 
-class MsgAppConfig(BaseSettings):
+class AppConfig(BaseSettings):
     """Application configuration settings, including all sub-configurations."""
 
     smtp_settings: SMTPSettings = Field(default_factory=SMTPSettings)
@@ -34,9 +34,9 @@ class MsgAppConfig(BaseSettings):
         env_file_encoding = "utf-8"
 
 
-def load_config() -> MsgAppConfig:
+def load_config() -> AppConfig:
     """Load and return the application configuration."""
-    return MsgAppConfig()
+    return AppConfig()
 
 
 # This allows the settings to be loaded when the module is imported
