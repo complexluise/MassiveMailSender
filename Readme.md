@@ -78,11 +78,6 @@ Para enviar correos electrónicos a través de SMTP con Gmail de manera segura, 
    - Utilice esta contraseña de aplicación en lugar de su contraseña normal en el archivo `.env` bajo `SMTP_PASSWORD`.
    - Asegúrese de no compartir esta contraseña y de almacenarla de forma segura.
 
-### Ventajas de las Contraseñas de Aplicación
-
-- **Seguridad Mejorada**: Las contraseñas de aplicación son específicas para la aplicación que las usa, lo que significa que si alguna vez se compromete, solo afectará esa aplicación y no tendrá acceso completo a su cuenta de Google.
-- **Facilidad de Revocación**: Puede revocar una contraseña de aplicación en cualquier momento sin cambiar su contraseña de Google, lo que hace que sea fácil gestionar y mantener la seguridad.
-
 ## Preparación de Archivos para el Envío de Mensajes
 
 Para utilizar la aplicación de mensajería masiva, necesitarás preparar dos tipos de archivos:
