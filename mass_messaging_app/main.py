@@ -1,6 +1,7 @@
 import os
 import argparse
 from dotenv import load_dotenv
+from tqdm import tqdm
 
 from mass_messaging_app.config.settings import settings
 from mass_messaging_app.models.models import Contact, MessageTemplate
@@ -17,14 +18,23 @@ load_dotenv()
 
 
 def send_mail(contacts: list[Contact], template_path: str):
-    template: MessageTemplate = load_message_template(template_path)
+    template = load_message_template(template_path)
+    email_sender = setup_email_sender(settings.smtp_settings)
 
-    email_sender: EmailSender = setup_email_sender(smtp_settings=settings.smtp_settings)
+    successes, failures = 0, 0
 
-    for contact in contacts:
-        rendered_message = render_message(template, contact)
-        email_sender.send_email(contact, template.subject, rendered_message)
-        print(f"Email sent to {contact.email}")
+    with tqdm(total=len(contacts), desc="Sending Emails", unit="email") as progress_bar:
+        for contact in contacts:
+            try:
+                message_body = render_message(template, contact)
+                email_sender.send_email(contact, template.subject, message_body)
+                successes += 1
+            except Exception as error:
+                print(f"Failed to send email to {contact.email}: {error}")
+                failures += 1
+            progress_bar.update(1)
+
+    print(f"Email campaign completed: {successes} sent, {failures} failed.")
 
 
 def main():
