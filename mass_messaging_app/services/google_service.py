@@ -8,7 +8,7 @@ from mass_messaging_app.models.constants import SCOPES
 from mass_messaging_app.config.settings import GoogleServiceSettings
 
 
-def get_credentials_from_oauth():
+def _get_credentials_from_oauth():
     from google.oauth2.credentials import Credentials
     from google.auth.transport.requests import Request
     from google_auth_oauthlib.flow import InstalledAppFlow
@@ -33,18 +33,18 @@ def get_credentials_from_oauth():
             token.write(creds.to_json())
 
 
-def get_service(credentials_path: str, scopes: list[str]):
+def _get_service(credentials_path: str, scopes: list[str]):
     """Create a Google Sheets service client."""
     credentials = Credentials.from_service_account_file(credentials_path, scopes=scopes)
     service = build("sheets", "v4", credentials=credentials)
     return service
 
 
-def fetch_contacts_from_sheet(
+def _fetch_contacts_from_sheet(
     settings: GoogleServiceSettings, spreadsheet_id: str, range_name: str
 ) -> list[Contact]:
     """Fetch contacts from a Google Sheet and return a list of Contact models."""
-    service = get_service(
+    service = _get_service(
         settings.google_service_account,
         ["https://www.googleapis.com/auth/spreadsheets.readonly"],
     )
