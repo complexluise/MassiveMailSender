@@ -83,7 +83,46 @@ Para enviar correos electrónicos a través de SMTP con Gmail de manera segura, 
 - **Seguridad Mejorada**: Las contraseñas de aplicación son específicas para la aplicación que las usa, lo que significa que si alguna vez se compromete, solo afectará esa aplicación y no tendrá acceso completo a su cuenta de Google.
 - **Facilidad de Revocación**: Puede revocar una contraseña de aplicación en cualquier momento sin cambiar su contraseña de Google, lo que hace que sea fácil gestionar y mantener la seguridad.
 
-Al seguir estos pasos, puede configurar su aplicación de mensajería masiva para enviar correos electrónicos de forma segura utilizando el servidor SMTP de Gmail y una contraseña de aplicación.
+## Preparación de Archivos para el Envío de Mensajes
+
+Para utilizar la aplicación de mensajería masiva, necesitarás preparar dos tipos de archivos:
+
+1. **Archivo de Contactos**: Este es un archivo CSV que contiene los datos de los contactos a quienes deseas enviar el mensaje. Debes asegurarte de que este archivo esté correctamente formateado y contenga todas las columnas necesarias para tu plantilla de mensaje.
+
+2. **Archivo de Plantilla de Mensaje**: Este es un archivo JSON que contiene la plantilla del mensaje que se enviará. Las variables utilizadas en esta plantilla deben coincidir exactamente con los nombres de las columnas en tu archivo CSV de contactos.
+
+### Creación del Archivo de Contactos
+
+El archivo CSV de contactos debe incluir todas las columnas que necesitarás en tu mensaje. Por ejemplo, si tu plantilla de mensaje hace referencia a `{{name}}`, `{{email}}` y `{{phone}}`, tu archivo CSV debe incluir estas columnas exactamente con esos encabezados.
+
+**Ejemplo de archivo CSV:**
+
+```plaintext
+name,email,phone
+Alice Johnson,alice@example.com,555-0100
+Bob Smith,bob@example.com,555-0101
+```
+
+### Creación del Archivo de Plantilla de Mensaje
+
+Debes crear un archivo JSON que defina el sujeto y el cuerpo del mensaje, utilizando las variables que corresponden a las columnas de tu archivo de contactos. 
+
+**Ejemplo de archivo de plantilla (template.json):**
+
+```json
+{
+  "subject": "Hello {{name}}",
+  "body": "Dear {{name}},\nYour contact email is {{email}} and your phone number is {{phone}}.\nBest regards."
+}
+```
+
+### Uso de Variables Consistentes
+
+Es crucial que las variables utilizadas en la plantilla del mensaje (`{{name}}`, `{{email}}`, `{{phone}}` en el ejemplo) coincidan exactamente con los encabezados de las columnas en el archivo CSV. Cualquier discrepancia en el nombre de las variables resultará en errores o en datos incorrectamente mapeados en los mensajes enviados.
+
+### Instrucciones de Uso
+
+Una vez que tengas listos tus archivos de contactos y de plantilla, puedes ejecutar la aplicación utilizando los comandos especificados en la sección de Uso de este documento. Asegúrate de especificar correctamente las rutas a tus archivos de contactos y plantilla cuando utilices los comandos de la aplicación.
 
 
 ## Uso
