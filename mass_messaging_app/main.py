@@ -18,15 +18,15 @@ load_dotenv()
 
 
 def send_mail(contacts: list[Contact], template_path: str):
-    template = load_message_template(template_path)
-    email_sender = setup_email_sender(settings.smtp_settings)
+    template: MessageTemplate = load_message_template(template_path)
+    email_sender: EmailSender = setup_email_sender(settings.smtp_settings)
 
     successes, failures = 0, 0
 
     with tqdm(total=len(contacts), desc="Sending Emails", unit="email") as progress_bar:
         for contact in contacts:
             try:
-                message_body = render_message(template, contact)
+                message_body: str = render_message(template, contact)
                 email_sender.send_email(contact, template.subject, message_body)
                 successes += 1
             except Exception as error:
