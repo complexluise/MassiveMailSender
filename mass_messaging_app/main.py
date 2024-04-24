@@ -50,7 +50,7 @@ def main():
     elif args.command == 'send_mail':
         contacts: list[Contact] = []
         if args.contacts_file:
-            contacts = fetch_contacts_from_csv(args.contacts_file)  # TODO aquí puede haber un error.
+            contacts = fetch_contacts_from_csv(args.contacts_file)
         elif args.spreadsheet_id and args.range_name:
             contacts = fetch_contacts_from_gsheets(settings.google_settings, args.spreadsheet_id, args.range_name)
         else:
