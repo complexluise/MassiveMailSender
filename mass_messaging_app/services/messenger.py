@@ -20,11 +20,11 @@ class EmailSender:
         msg.attach(MIMEText(message, "plain"))
 
         try:
-            with smtplib.SMTP(self.config.smtp_server, self.config.smtp_port) as server:
-                if self.config.use_ssl:
+            with smtplib.SMTP_SSL(self.config.smtp_server, self.config.smtp_port) as server:
+                if self.config.smtp_use_ssl:
                     server.starttls()
                 server.login(self.config.smtp_user, self.config.smtp_password)
-                server.send_message(msg)
+                server.sendmail(self.config.smtp_user, contact.email, msg.as_string())
                 print(f"Email sent successfully to {contact.email}")
         except smtplib.SMTPException as e:
             print(f"Failed to send email to {contact.email}. Error: {e}")
