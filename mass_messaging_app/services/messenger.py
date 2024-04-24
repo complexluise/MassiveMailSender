@@ -11,13 +11,13 @@ class EmailSender:
     def __init__(self, config: AppConfig):
         self.config = config
 
-    def send_email(self, contact: Contact, subject: str, message: str):
-        """Sends an email to a single recipient."""
+    def send_email(self, contact: Contact, subject: str, html_message: str):
+        """Sends an HTML email to a single recipient using Gmail SMTP service."""
         msg = MIMEMultipart()
         msg["From"] = self.config.smtp_user
         msg["To"] = contact.email
         msg["Subject"] = subject
-        msg.attach(MIMEText(message, "plain"))
+        msg.attach(MIMEText(html_message, "html"))
 
         try:
             with smtplib.SMTP_SSL(self.config.smtp_server, self.config.smtp_port) as server:
