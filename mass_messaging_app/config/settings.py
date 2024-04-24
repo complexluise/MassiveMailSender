@@ -8,17 +8,16 @@ class SMTPSettings(BaseSettings):
     smtp_server: str = Field(..., env="SMTP_SERVER")
     smtp_port: int = Field(587, env="SMTP_PORT")
     smtp_user: EmailStr = Field(..., env="SMTP_USER")
-    smtp_password: SecretStr = Field(..., env="SMTP_PASSWORD")
-    use_ssl: bool = Field(True, env="SMTP_USE_SSL")
+    smtp_password: str = Field(..., env="SMTP_PASSWORD")
+    smtp_use_ssl: bool = Field(True, env="SMTP_USE_SSL")
 
 
 class GoogleServiceSettings(BaseSettings):
-    """Google API service configuration settings."""
+    """Google API service configuration settings.
+    OAuth Authorization
+    """
+    google_credentials_path: str = Field(..., env="GOOGLE_CREDENTIALS_PATH")
 
-    google_api_key: str = Field(..., env="GOOGLE_API_KEY")
-    google_service_account: str = Field(..., env="GOOGLE_SERVICE_ACCOUNT")
-    google_project_id: str = Field(..., env="GOOGLE_PROJECT_ID")
-    credentials_path: str = Field(..., env="GOOGLE_CREDENTIALS_PATH")
 
 
 class AppConfig(BaseSettings):
@@ -32,6 +31,7 @@ class AppConfig(BaseSettings):
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        extra = "ignore"
 
 
 def load_config() -> AppConfig:
