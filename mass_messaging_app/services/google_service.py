@@ -45,7 +45,7 @@ def _fetch_contacts_from_sheet(
 ) -> list[Contact]:
     """Fetch contacts from a Google Sheet and return a list of Contact models."""
     service = _get_service(
-        settings.google_service_account,
+        settings.google_credentials_path,
         ["https://www.googleapis.com/auth/spreadsheets.readonly"],
     )
     sheet = (
