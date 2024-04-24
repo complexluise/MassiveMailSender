@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
-from typing import List, Optional
+from typing import Optional
+
 
 class Contact(BaseModel):
     name: str
@@ -8,9 +9,11 @@ class Contact(BaseModel):
     custom_fields: Optional[dict] = Field(default_factory=dict)
     # TODO add custom from sheets if is needed
 
+
 class MessageTemplate(BaseModel):
     subject: str
     body: str
+
 
 class AppConfig(BaseModel):
     smtp_server: str
