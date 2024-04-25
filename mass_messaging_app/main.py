@@ -26,7 +26,13 @@ def send_mail(contacts: list[Contact], campaign_path: str):
             try:
                 time.sleep(0.1)
                 message_body: str = render_message(campaign, contact)
-                email_sender.send_email(contact, campaign.subject, message_body, campaign.attachment, campaign.attachment_filename)
+                email_sender.send_email(
+                    contact,
+                    campaign.subject,
+                    message_body,
+                    campaign.attachment,
+                    campaign.attachment_filename,
+                )
                 successes += 1
             except Exception as error:
                 print(f"Failed to send email to {contact.email}: {error}")
@@ -63,9 +69,7 @@ def main():
         if args.contacts_file:
             contacts = fetch_contacts_from_csv(args.contacts_file)
         else:
-            parser.error(
-                "Must specify either --contacts_file"
-            )
+            parser.error("Must specify either --contacts_file")
         send_mail(contacts, args.campaign)
 
 

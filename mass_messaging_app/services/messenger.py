@@ -13,7 +13,14 @@ class EmailSender:
     def __init__(self, config: AppConfig):
         self.config = config
 
-    def send_email(self, contact: Contact, subject: str, html_message: str, attachment: bytes, attachment_filename: str):
+    def send_email(
+        self,
+        contact: Contact,
+        subject: str,
+        html_message: str,
+        attachment: bytes,
+        attachment_filename: str,
+    ):
         """Sends an HTML email to a single recipient using Gmail SMTP service."""
         msg = MIMEMultipart()
         msg["From"] = self.config.smtp_user
@@ -22,12 +29,12 @@ class EmailSender:
         msg.attach(MIMEText(html_message, "html"))
 
         if attachment:
-            part = MIMEBase('application', 'octet-stream')
+            part = MIMEBase("application", "octet-stream")
             part.set_payload(attachment)
             encoders.encode_base64(part)
             part.add_header(
-                'Content-Disposition',
-                f'attachment; filename={attachment_filename}',
+                "Content-Disposition",
+                f"attachment; filename={attachment_filename}",
             )
             msg.attach(part)
 

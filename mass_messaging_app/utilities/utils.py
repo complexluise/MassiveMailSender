@@ -55,7 +55,7 @@ def load_message_campaign(json_file_path: str) -> MessageCampaign:
         template_data["attachment"] = attachment
         template_data["attachment_filename"] = os.path.basename(attachment_file_name)
     else:
-        template_data["attachment"] = b''
+        template_data["attachment"] = b""
 
     template_data.pop("attachment_file", None)
 
