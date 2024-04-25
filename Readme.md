@@ -115,7 +115,7 @@ Cree un archivo JSON que contenga la configuración de la campaña. Las variable
 * **attachment_file**: Nombre del archivo que contiene el archivo adjunto que se enviara. Este parametro es opcional si no hay un adjunto no se deberia colocar.
 
 ### Creación de la plantilla
-Cree un archivo html con la plantilla del mensaje en HTML (Si no sabes qué es HTML o como usarlo para personalizar los mensajes pidele ayuda a chatGPT （￣︶￣）↗)
+Cree un archivo con la plantilla del mensaje en HTML (Si no sabe qué es HTML o como usarlo para personalizar los mensajes pidale ayuda a chatGPT （￣︶￣）↗)
 
 Aquí va un ejemplo del archivo
 ```html
