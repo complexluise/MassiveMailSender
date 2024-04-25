@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from tqdm import tqdm
 
 from mass_messaging_app.config.settings import settings
-from mass_messaging_app.models.models import Contact, MessageTemplate
+from mass_messaging_app.models.models import Contact, MessageCampaign
 from mass_messaging_app.services.data_source import (
     get_google_credentials,
     fetch_contacts_from_gsheets,
@@ -12,13 +12,13 @@ from mass_messaging_app.services.data_source import (
 )
 from mass_messaging_app.services.message_processing import render_message
 from mass_messaging_app.services.messenger import EmailSender, setup_email_sender
-from mass_messaging_app.utilities.utils import load_message_template
+from mass_messaging_app.utilities.utils import load_message_campaign
 
 load_dotenv()
 
 
-def send_mail(contacts: list[Contact], template_path: str):
-    template: MessageTemplate = load_message_template(template_path)
+def send_mail(contacts: list[Contact], campaign_path: str):
+    campaign: MessageCampaign = load_message_campaign(campaign_path)
     email_sender: EmailSender = setup_email_sender(settings.smtp_settings)
 
     successes, failures = 0, 0
@@ -26,8 +26,9 @@ def send_mail(contacts: list[Contact], template_path: str):
     with tqdm(total=len(contacts), desc="Sending Emails", unit="email") as progress_bar:
         for contact in contacts:
             try:
-                message_body: str = render_message(template, contact)
-                email_sender.send_email(contact, template.subject, message_body)
+                time.sleep(0.1)
+                message_body: str = render_message(campaign, contact)
+                email_sender.send_email(contact, campaign.subject, message_body, campaign.attachment, campaign.attachment_filename)
                 successes += 1
             except Exception as error:
                 print(f"Failed to send email to {contact.email}: {error}")
@@ -63,9 +64,9 @@ def main():
         required=False,
     )
     send_mail_csv.add_argument(
-        "--msg_template",
+        "--campaign",
         type=str,
-        help="Path to the message template JSON file.",
+        help="Path to the message campaign JSON file.",
         required=True,
     )
 
@@ -95,7 +96,7 @@ def main():
             parser.error(
                 "Must specify either --contacts_file or both --spreadsheet_id and --range_name for send_mail."
             )
-        send_mail(contacts, args.msg_template)
+        send_mail(contacts, args.campaign)
 
 
 if __name__ == "__main__":
@@ -108,12 +109,12 @@ if __name__ == "__main__":
 
     To send emails to contacts listed in a CSV file:
     ```
-    mass_messaging_app send_mail --contacts_file ./contacts/contacts.csv --msg_template ./templates/example.json
+    mass_messaging_app send_mail --contacts_file ./contacts/contacts.csv --campaign ./campaigns/example.json
     ```
 
     To send emails to contacts from a Google Spreadsheet:
     ```
-    mass_messaging_app send_mail --spreadsheet_id SPREADSHEET_ID --range_name RANGE_NAME --msg_template ./templates/example.json
+    mass_messaging_app send_mail --spreadsheet_id SPREADSHEET_ID --range_name RANGE_NAME --campaign ./campaigns/example.json
     ```
 
     Before sending emails using Google Sheets as the source, ensure that you have obtained credentials:
@@ -125,7 +126,7 @@ if __name__ == "__main__":
     --contacts_file      Path to the CSV file containing contacts.
     --spreadsheet_id     The ID of the Google Spreadsheet.
     --range_name         The range within the Google Spreadsheet to read contacts.
-    --msg_template       Path to the JSON file that contains the email message template.
+    --campaign       Path to the JSON file that contains the email message campaign.
 
     Note: When using Google Sheets, --spreadsheet_id and --range_name must both be provided.
     """

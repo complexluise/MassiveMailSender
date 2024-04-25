@@ -2,17 +2,17 @@ import json
 import os
 
 from jinja2 import Template
-from mass_messaging_app.models.models import MessageTemplate, Contact
+from mass_messaging_app.models.models import MessageCampaign, Contact
 
 
-def render_message(template: MessageTemplate, contact: Contact) -> str:
+def render_message(template: MessageCampaign, contact: Contact) -> str:
     jinja_template = Template(template.body)
     return jinja_template.render(**contact.dict())
 
 
-def load_message_template(json_file_path: str) -> MessageTemplate:
+def load_message_campaign(json_file_path: str) -> MessageCampaign:
     """
-    Load a message template from a JSON file. The JSON file contains metadata about the campaign,
+    Load a message campaign from a JSON file. The JSON file contains metadata about the campaign,
     including a reference to an HTML file for the email body. The HTML file is assumed to be in the
     same directory as the JSON file.
 
@@ -58,4 +58,4 @@ def load_message_template(json_file_path: str) -> MessageTemplate:
 
     template_data.pop("attachment_file", None)
 
-    return MessageTemplate(**template_data)
+    return MessageCampaign(**template_data)

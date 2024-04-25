@@ -1,20 +1,20 @@
 from jinja2 import Template
-from mass_messaging_app.models.models import MessageTemplate, Contact
+from mass_messaging_app.models.models import MessageCampaign, Contact
 
 
-def render_message(template: MessageTemplate, contact: Contact) -> str:
+def render_message(template: MessageCampaign, contact: Contact) -> str:
     """
-    Render a message from a template with placeholders filled based on contact details.
+    Render a message from a campaigns with placeholders filled based on contact details.
 
     Parameters:
-    - template (MessageTemplate): The message template with subject and body containing placeholders.
-    - contact (Contact): The contact whose details will fill the template's placeholders.
+    - campaigns (MessageTemplate): The message campaigns with subject and body containing placeholders.
+    - contact (Contact): The contact whose details will fill the campaigns's placeholders.
 
     Returns:
     - str: The rendered message body.
     """
-    # Create a Jinja2 template from the template body
+    # Create a Jinja2 campaigns from the campaigns body
     jinja_template = Template(template.body)
 
-    # Render the template with data from the contact
+    # Render the campaigns with data from the contact
     return jinja_template.render(**contact.dict())
