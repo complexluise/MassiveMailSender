@@ -156,8 +156,10 @@ Para contribuir a este proyecto, haga un fork del repositorio y envíe un pull r
 ## Roadmap
 Para las siguientes versiones de la APP se espera.
 * Usar inteligencia artificial generativa para personalizar los mensajes a un mayor nivel.
-* Hacer pruebas unitarias
-* Cambiar nombre por algo más cool
+* Hacer pruebas unitarias.
+* Cambiar nombre por algo más cool.
+* Volver una aplicación pipx
+* Usar [HyperModernPython](https://medium.com/@cjolowicz/hypermodern-python-d44485d9d769)
 
 ## Licencia
 
