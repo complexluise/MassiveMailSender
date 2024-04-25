@@ -11,6 +11,8 @@ class Contact(BaseModel):
 class MessageCampaign(BaseModel):
     subject: str
     body: str
+    attachment: bytes
+    attachment_filename: str
 
 
 class AppConfig(BaseModel):
