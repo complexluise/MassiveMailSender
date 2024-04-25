@@ -1,5 +1,4 @@
-from pydantic import BaseModel, EmailStr, Extra, root_model
-from typing import Optional
+from pydantic import BaseModel, EmailStr, Extra
 
 
 class Contact(BaseModel):
@@ -9,14 +8,8 @@ class Contact(BaseModel):
         extra = Extra.allow  # Allows the model to accept arbitrary additional fields
 
 
-class MessageTemplate(BaseModel):
+class MessageCampaign(BaseModel):
     subject: str
     body: str
-
-
-class AppConfig(BaseModel):
-    smtp_server: str
-    smtp_port: int
-    smtp_user: str
-    smtp_password: str
-    use_ssl: bool = True
+    attachment: bytes
+    attachment_filename: str

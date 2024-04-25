@@ -2,17 +2,17 @@ import json
 import os
 
 from jinja2 import Template
-from mass_messaging_app.models.models import MessageTemplate, Contact
+from mass_messaging_app.models.models import MessageCampaign, Contact
 
 
-def render_message(template: MessageTemplate, contact: Contact) -> str:
+def render_message(template: MessageCampaign, contact: Contact) -> str:
     jinja_template = Template(template.body)
     return jinja_template.render(**contact.dict())
 
 
-def load_message_template(json_file_path: str) -> MessageTemplate:
+def load_message_campaign(json_file_path: str) -> MessageCampaign:
     """
-    Load a message template from a JSON file. The JSON file contains metadata about the campaign,
+    Load a message campaign from a JSON file. The JSON file contains metadata about the campaign,
     including a reference to an HTML file for the email body. The HTML file is assumed to be in the
     same directory as the JSON file.
 
@@ -39,23 +39,24 @@ def load_message_template(json_file_path: str) -> MessageTemplate:
     body_file_name = template_data.get("body_file")
     if body_file_name:
         body_file_path = os.path.join(directory, body_file_name)
-        with open(body_file_path, "r", encoding="utf-8") as file:
-            body_content = file.read()
+        with open(body_file_path, "r", encoding="utf-8") as body_file:
+            body_content = body_file.read()
         template_data["body"] = body_content
     else:
         template_data["body"] = ""
 
     template_data.pop("body_file", None)
 
-    attachment_file = template_data.get("attachment_file")
-    if attachment_file:
-        attachment_file = os.path.join(directory, attachment_file)
-        with open(attachment_file, "r", encoding="utf-8") as file:
-            attachment = file.read()
+    attachment_file_name = template_data.get("attachment_file")
+    if attachment_file_name:
+        attachment_file_path = os.path.join(directory, attachment_file_name)
+        with open(attachment_file_path, "rb") as attachment_file:
+            attachment: bytes = attachment_file.read()
         template_data["attachment"] = attachment
+        template_data["attachment_filename"] = os.path.basename(attachment_file_name)
     else:
-        template_data["attachment"] = ""
+        template_data["attachment"] = b""
 
     template_data.pop("attachment_file", None)
 
-    return MessageTemplate(**template_data)
+    return MessageCampaign(**template_data)
