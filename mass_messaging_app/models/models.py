@@ -13,11 +13,3 @@ class MessageCampaign(BaseModel):
     body: str
     attachment: bytes
     attachment_filename: str
-
-
-class AppConfig(BaseModel):
-    smtp_server: str
-    smtp_port: int
-    smtp_user: str
-    smtp_password: str
-    use_ssl: bool = True

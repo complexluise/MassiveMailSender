@@ -12,21 +12,10 @@ class SMTPSettings(BaseSettings):
     smtp_use_ssl: bool = Field(True, env="SMTP_USE_SSL")
 
 
-class GoogleServiceSettings(BaseSettings):
-    """Google API service configuration settings.
-    OAuth Authorization
-    """
-
-    google_credentials_path: str = Field(..., env="GOOGLE_CREDENTIALS_PATH")
-
-
 class AppConfig(BaseSettings):
     """Application configuration settings, including all sub-configurations."""
 
     smtp_settings: SMTPSettings = Field(default_factory=SMTPSettings)
-    google_settings: GoogleServiceSettings = Field(
-        default_factory=GoogleServiceSettings
-    )
 
     class Config:
         env_file = ".env"
