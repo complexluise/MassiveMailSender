@@ -160,6 +160,8 @@ Para las siguientes versiones de la APP se espera.
 * Cambiar nombre por algo más cool.
 * Volver una aplicación pipx
 * Usar [HyperModernPython](https://medium.com/@cjolowicz/hypermodern-python-d44485d9d769)
+* Hacer Frontend.
+* Mejorar Logs.
 
 ## Licencia
 
