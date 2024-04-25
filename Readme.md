@@ -114,7 +114,7 @@ Cree un archivo JSON que contenga la configuración de la campaña. Las variable
 * **body_file**: Nombre del archivo HTML que contiene el cuerpo del correo electrónico. Este archivo debe estar diseñado para ser compatible con el formato de email y debería estar preparado para incluir variables dinámicas que se rellenarán en el momento del envío.
 * **attachment_file**: Nombre del archivo que contiene el archivo adjunto que se enviara. Este parametro es opcional si no hay un adjunto no se deberia colocar.
 
-## Creación de la plantilla
+### Creación de la plantilla
 Cree un archivo html con la plantilla del mensaje en HTML (Si no sabes qué es HTML o como usarlo para personalizar los mensajes pidele ayuda a chatGPT （￣︶￣）↗)
 
 Aquí va un ejemplo del archivo
