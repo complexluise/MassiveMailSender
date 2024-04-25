@@ -1,6 +1,0 @@
-{
-  "name": "Ejemplo",
-  "objective_campain": "Show json schema of template",
-  "subject": "Hello, {{ name }}",
-  "body": "Dear {{ name }},\nThis is your personalized message!"
-}

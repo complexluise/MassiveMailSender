@@ -1,0 +1,6 @@
+{
+  "name": "Example",
+  "objective_campain": "Show JSON schema of campaign",
+  "subject": "Hello, {{ name }}",
+  "body_file": "example.html"
+}
