@@ -1,4 +1,4 @@
-import os
+import time
 import argparse
 from dotenv import load_dotenv
 from tqdm import tqdm
