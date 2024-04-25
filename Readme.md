@@ -98,18 +98,27 @@ Alice Johnson,alice@example.com,555-0100
 Bob Smith,bob@example.com,555-0101
 ```
 
-### Creación del Archivo de Plantilla de Mensaje
+### Creación del Archivo de Campaña
 
-Debes crear un archivo JSON que defina el sujeto y el cuerpo del mensaje, utilizando las variables que corresponden a las columnas de tu archivo de contactos. 
+Para iniciar una campaña de email marketing, es necesario crear un archivo JSON que contenga las especificaciones de la campaña. Este archivo servirá como plantilla para definir los componentes clave de tus correos electrónicos, asegurando que cada mensaje se genere con los datos correctos y el formato deseado.
 
-**Ejemplo de archivo de plantilla (template.json):**
+**Ejemplo de archivo de campaña (campaign.json):**
 
 ```json
 {
-  "subject": "Hello {{name}}",
-  "body": "Dear {{name}},\nYour contact email is {{email}} and your phone number is {{phone}}.\nBest regards."
+  "name": "Example",
+  "objective_campain": "Show JSON schema of campaign",
+  "subject": "Hello, {{ name }}",
+  "body_file": "example.html",
+   "attachment_file": "example.pdf"
 }
 ```
+
+name: Un identificador o nombre para la campaña. Esto ayuda a organizar y referenciar la campaña dentro de otros sistemas o registros.
+objective_campain: Descripción breve del objetivo de la campaña. Esto puede ser útil para clarificar la intención detrás de la campaña, como informar a los clientes sobre una nueva oferta, reactivar usuarios inactivos, etc.
+subject: Asunto del email que será enviado. Este campo puede incluir variables que serán reemplazadas con datos específicos de cada destinatario, como {{ name }}, para personalizar cada mensaje.
+body_file: Nombre del archivo HTML que contiene el cuerpo del correo electrónico. Este archivo debe estar diseñado para ser compatible con el formato de email y debería estar preparado para incluir variables dinámicas que se rellenarán en el momento del envío.
+attachment_file: Nombre del archivo que contiene el archivo adjunto que se enviara. Este parametro es opcional si no hay un adjunto no se deberia colocar.
 
 ### Uso de Variables Consistentes
 
@@ -127,7 +136,7 @@ Una vez que tengas listos tus archivos de contactos y de plantilla, puedes ejecu
 Para enviar correos desde un archivo CSV, use el siguiente comando:
 
 ```bash
-python main.py send_mail --contacts_file ./ruta/a/contacts.csv --msg_template ./ruta/a/template.json
+python main.py send_mail --contacts_file ./ruta/a/contacts.csv --campaign ./ruta/a/campaigns.json
 ```
 
 ### Enviar Correos desde Google Sheets
@@ -135,7 +144,7 @@ python main.py send_mail --contacts_file ./ruta/a/contacts.csv --msg_template ./
 Para enviar correos utilizando datos de Google Sheets, asegúrese de tener las credenciales de la API de Google configuradas correctamente y luego ejecute:
 
 ```bash
-python main.py send_mail --spreadsheet_id SU_ID_DE_HOJA --range_name 'A1:C2' --msg_template ./ruta/a/template.json
+python main.py send_mail --spreadsheet_id SU_ID_DE_HOJA --range_name 'A1:C2' --campaign ./ruta/a/campaigns.json
 ```
 
 ### Obtener Credenciales de Google
