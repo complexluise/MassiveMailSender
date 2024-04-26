@@ -16,7 +16,7 @@ Para configurar y ejecutar esta aplicación, siga estos pasos:
 
    ```bash
    git clone https://github.com/complexluise/MassiveMailSender.git
-   cd mass_messaging_app
+   cd MassiveMailSender
    ```
 
 2. **Configurar el entorno virtual**
