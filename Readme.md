@@ -15,7 +15,7 @@ Para configurar y ejecutar esta aplicación, siga estos pasos:
    Abra una terminal y ejecute el siguiente comando para clonar el repositorio:
 
    ```bash
-   git clone https://github.com/complexluise/mass_messaging_app.git
+   git clone https://github.com/complexluise/MassiveMailSender.git
    cd mass_messaging_app
    ```
 
