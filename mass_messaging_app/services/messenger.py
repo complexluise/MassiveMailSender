@@ -1,6 +1,6 @@
 import smtplib
-from email import encoders
-from email.mime.base import MIMEBase
+from email.message import Message
+from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from mass_messaging_app.models.models import Contact
@@ -29,15 +29,11 @@ class EmailSender:
         msg.attach(MIMEText(html_message, "html"))
 
         if attachment:
-            part = MIMEBase("application", "octet-stream")
-            part.set_payload(attachment)
-            encoders.encode_base64(part)
-            part.add_header(
-                "Content-Disposition",
-                f"attachment; filename={attachment_filename}",
+            part: Message = MIMEApplication(attachment, Name=attachment_filename)
+            part["Content-Disposition"] = (
+                'attachment; filename="%s"' % attachment_filename
             )
             msg.attach(part)
-
         try:
             with smtplib.SMTP_SSL(
                 self.config.smtp_server, self.config.smtp_port
