@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel, EmailStr, Extra
 
 
@@ -12,4 +14,4 @@ class MessageCampaign(BaseModel):
     subject: str
     body: str
     attachment: bytes
-    attachment_filename: str
+    attachment_filename: Optional[str] = None
