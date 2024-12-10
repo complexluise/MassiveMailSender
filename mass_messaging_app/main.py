@@ -67,7 +67,7 @@ def main():
     if args.command == "send_mail":
         contacts: list[Contact] = []
         if args.contacts_file:
-            contacts = fetch_contacts_from_csv(args.contacts_file)
+            contacts: list[Contact] = fetch_contacts_from_csv(args.contacts_file)
         else:
             parser.error("Must specify either --contacts_file")
         send_mail(contacts, args.campaign)
