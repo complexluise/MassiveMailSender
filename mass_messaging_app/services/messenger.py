@@ -29,7 +29,11 @@ class EmailSender:
         msg.attach(MIMEText(html_message, "html"))
 
         if attachment:
-            part: Message = MIMEApplication(attachment, Name=attachment_filename)
+            part: Message = MIMEApplication(
+                attachment,
+                Name=attachment_filename,
+                _subtype="pdf"
+            )
             part["Content-Disposition"] = (
                 'attachment; filename="%s"' % attachment_filename
             )
