@@ -24,7 +24,6 @@ def send_mail(contacts: list[Contact], campaign_path: str):
     with tqdm(total=len(contacts), desc="Sending Emails", unit="email") as progress_bar:
         for contact in contacts:
             try:
-                time.sleep(0.1)
                 message_body: str = render_message(campaign, contact)
                 email_sender.send_email(
                     contact,
@@ -34,6 +33,7 @@ def send_mail(contacts: list[Contact], campaign_path: str):
                     campaign.attachment_filename,
                 )
                 successes += 1
+                time.sleep(0.5)
             except Exception as error:
                 print(f"Failed to send email to {contact.email}: {error}")
                 failures += 1
