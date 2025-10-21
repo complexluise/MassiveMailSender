@@ -3,8 +3,8 @@ from email.message import Message
 from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from mass_messaging_app.models.models import Contact
-from mass_messaging_app.config.settings import AppConfig
+from models.models import Contact
+from config.settings import AppConfig
 
 
 class EmailSender:

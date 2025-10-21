@@ -1,6 +1,6 @@
 from csv import DictReader
 
-from mass_messaging_app.models.models import Contact
+from models.models import Contact
 
 
 def fetch_contacts_from_csv(file_path: str) -> list[Contact]:
@@ -15,7 +15,7 @@ def fetch_contacts_from_csv(file_path: str) -> list[Contact]:
     """
     contacts = []
     try:
-        with open(file_path, mode="r", newline="", encoding="utf-8-sig") as file:
+        with open(file_path, mode="r", encoding="utf-8-sig") as file:
             reader: DictReader = DictReader(file)
             for row in reader:
                 # Assuming the CSV column names match the Contact model field names

@@ -1,6 +1,10 @@
 from pydantic import EmailStr, SecretStr, Field
 from pydantic_settings import BaseSettings
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class SMTPSettings(BaseSettings):
     """SMTP-specific configuration settings."""

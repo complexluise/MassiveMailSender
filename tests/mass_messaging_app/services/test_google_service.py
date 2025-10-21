@@ -1,6 +1,6 @@
-from mass_messaging_app.config.settings import GoogleServiceSettings
-from mass_messaging_app.models.models import Contact
-from mass_messaging_app.services.google_service import (
+from config.settings import GoogleServiceSettings
+from models.models import Contact
+from services.google_service import (
     _get_credentials_from_oauth,
     _get_service,
     _fetch_contacts_from_sheet,

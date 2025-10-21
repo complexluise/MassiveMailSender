@@ -2,15 +2,16 @@ import time
 import argparse
 from dotenv import load_dotenv
 from tqdm import tqdm
-
-from mass_messaging_app.config.settings import settings
-from mass_messaging_app.models.models import Contact, MessageCampaign
-from mass_messaging_app.services.data_source import (
+import sys
+print(sys.path)
+from config.settings import settings
+from models.models import Contact, MessageCampaign
+from services.data_source import (
     fetch_contacts_from_csv,
 )
-from mass_messaging_app.services.message_processing import render_message
-from mass_messaging_app.services.messenger import EmailSender, setup_email_sender
-from mass_messaging_app.utilities.utils import load_message_campaign
+from services.message_processing import render_message
+from services.messenger import EmailSender, setup_email_sender
+from utilities.utils import load_message_campaign
 
 load_dotenv()
 
@@ -21,8 +22,9 @@ def send_mail(contacts: list[Contact], campaign_path: str):
 
     successes, failures = 0, 0
 
+
     with tqdm(total=len(contacts), desc="Sending Emails", unit="email") as progress_bar:
-        for contact in contacts:
+        for contact in contacts[1:]:
             try:
                 message_body: str = render_message(campaign, contact)
                 email_sender.send_email(
