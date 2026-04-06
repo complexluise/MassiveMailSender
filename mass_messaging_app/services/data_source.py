@@ -1,6 +1,6 @@
 from csv import DictReader
 
-from models.models import Contact
+from ..models.models import Contact
 
 
 def fetch_contacts_from_csv(file_path: str) -> list[Contact]:

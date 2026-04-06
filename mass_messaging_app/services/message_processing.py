@@ -1,5 +1,5 @@
 from jinja2 import Template
-from models.models import MessageCampaign, Contact
+from ..models.models import MessageCampaign, Contact
 
 
 def render_message(template: MessageCampaign, contact: Contact) -> str:
